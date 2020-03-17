@@ -3,12 +3,31 @@ info:
   version: '1.0.0'
   title: 'blockchain network API'
   description: 'My own blockchain API'
+tags:
+  - name: individual node status
+    description: blockchain, nodeurl, network..
+  - name: decentralized network
+    description: Creating a decentralized blockchain network
+  - name: mining and synchronizing the network
+    description: mine, reward, and share
+  - name: consensus
+    description: longest chain rule
+  - name: get specific Info
+    description: search certain block and transaction by Id
+
 servers:
   - description: My own blockchain API
-    url: http://localhost:3001
+  - url: http://localhost:3001
+  - url: http://localhost:3002
+  - url: http://localhost:3003
+  - url: http://localhost:3004
+  - url: http://localhost:3005
+
 paths:
   /blockchain:
     get:
+      tags:
+        - individual node status
       summary: get all chain that current node have
       responses:
         '200':
@@ -26,6 +45,8 @@ paths:
                 type: rray
   /transaction:
     post:
+      tags:
+        - mining and synchronizing the network
       summary: add new transaction to their own chain
       requestBody:
         required: true
@@ -50,6 +71,8 @@ paths:
                 type: string
   /transaction/broadcast:
     post:
+      tags:
+        - mining and synchronizing the network
       summary: create new transaction by using reqest and all let the other nodes pend this transaction on their own chain by using '/transaction' post api
       requestBody:
         required: true
@@ -74,6 +97,8 @@ paths:
                 type: string
   /mine:
     get:
+      tags:
+        - mining and synchronizing the network
       summary: proved work successfully, new block is created for reward, and all nodes register this block, and then current node broadcasting new transaction
       responses:
         '200':
@@ -85,6 +110,8 @@ paths:
                 type: string
   /receive-new-block:
     post:
+      tags:
+        - mining and synchronizing the network
       summary: register new block after verifying that the new block is correct
       requestBody:
         required: true
@@ -115,6 +142,8 @@ paths:
                 type: string
   /register-and-broadcast-node:
     post:
+      tags:
+        - decentralized network
       summary: register a node and broadcast it the network
       requestBody:
         required: true
@@ -135,6 +164,8 @@ paths:
                 type: string
   /register-node:
     post:
+      tags:
+        - decentralized network
       summary: register a node with the network
       requestBody:
         required: true
@@ -155,6 +186,8 @@ paths:
                 type: string
   /register-nodes-bulk:
     post:
+      tags:
+        - decentralized network
       summary: register multiple nodes at once
       requestBody:
         required: true
@@ -175,6 +208,8 @@ paths:
                 type: string
   /consensus:
     get:
+      tags:
+        - consensus
       summary: consensus
       responses:
         '200':
@@ -186,6 +221,8 @@ paths:
                 type: string
   /block/{blockHash}:
     get:
+      tags:
+        - get specific Info
       summary: get block by blockHash
       parameters:
         - in: path
@@ -204,6 +241,8 @@ paths:
                 type: object
   /transaction/{transaction}:
     get:
+      tags:
+        - get specific Info
       summary: get transaction by transactionId
       parameters:
         - in: path

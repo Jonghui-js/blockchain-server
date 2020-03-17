@@ -1,4 +1,5 @@
 const express = require('express');
+const cors = require('cors');
 const app = express();
 const bodyParser = require('body-parser');
 const Blockchain = require('./blockchain');
@@ -14,6 +15,7 @@ const nodeAddress = uuidv4()
 
 const bitcoin = new Blockchain();
 
+app.use(cors());
 app.use(express.static('public'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
